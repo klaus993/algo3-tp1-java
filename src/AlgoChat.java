@@ -28,6 +28,14 @@ public class AlgoChat {
         this.cantidadTotalMensajesRecibidos = 0;
     }
 
+    private boolean existeContacto(String nombreContacto) {
+        return this.contactos.containsKey(nombreContacto);
+    }
+
+    private boolean existeGrupo(String nombreGrupo) {
+        return this.grupos.containsKey(nombreGrupo);
+    }
+
     public void agregarContacto(String nombreContacto) throws UsuarioYaExiste {
         if (this.existeContacto(nombreContacto)) {
             throw new UsuarioYaExiste();
@@ -36,7 +44,10 @@ public class AlgoChat {
         cantidadDeContactos++;
     }
 
-    public void agregarContactoAGrupo(String nombreContacto, String nombreGrupo) {
-        
+    public void agregarContactoAGrupo(String nombreContacto, String nombreGrupo) throws UsuarioNoExiste, GrupoNoExiste{
+        if (!this.existeContacto(nombreContacto)) {
+            throw new UsuarioNoExiste();
+        }
+        if (!this.)
     }
 }
