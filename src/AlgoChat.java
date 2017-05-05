@@ -40,7 +40,7 @@ public class AlgoChat {
         if (this.existeContacto(nombreContacto)) {
             throw new UsuarioYaExiste();
         }
-        contactos[nombreContacto] = new Contacto(nombreContacto);
+        this.contactos.put(nombreContacto, new Contacto(nombreContacto));
         cantidadDeContactos++;
     }
 
@@ -48,6 +48,9 @@ public class AlgoChat {
         if (!this.existeContacto(nombreContacto)) {
             throw new UsuarioNoExiste();
         }
-        if (!this.)
+        if (!this.existeGrupo(nombreGrupo)) {
+            throw new GrupoNoExiste();
+        }
+        this.grupos.get(nombreGrupo).agregarMiembro(this.contactos.get(nombreContacto));
     }
 }
