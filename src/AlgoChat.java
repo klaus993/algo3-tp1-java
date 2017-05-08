@@ -19,7 +19,7 @@ public class AlgoChat {
     public AlgoChat (String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
         this.contactos = new HashMap<>();
-        this.grupos = HashMap<>();
+        this.grupos = new HashMap<>();
         this.cantidadDeChatsGrupales = 0;
         this.cantidadDeChatsIndividuales = 0;
         this.cantidadDeContactos = 0;
@@ -41,7 +41,7 @@ public class AlgoChat {
             throw new UsuarioYaExiste();
         }
         this.contactos.put(nombreContacto, new Contacto(nombreContacto));
-        cantidadDeContactos++;
+        this.cantidadDeContactos++;
     }
 
     public void agregarContactoAGrupo(String nombreContacto, String nombreGrupo) throws UsuarioNoExiste, GrupoNoExiste{
@@ -51,6 +51,6 @@ public class AlgoChat {
         if (!this.existeGrupo(nombreGrupo)) {
             throw new GrupoNoExiste();
         }
-        this.grupos.get(nombreGrupo).agregarMiembro(this.contactos.get(nombreContacto));
+        this.grupos.get(nombreGrupo).agregarMiembro(nombreContacto);
     }
 }
