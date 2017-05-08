@@ -1,3 +1,5 @@
+package algochat;
+
 import java.util.Map;
 import java.util.HashMap;
 
@@ -52,5 +54,26 @@ public class AlgoChat {
             throw new GrupoNoExiste();
         }
         this.grupos.get(nombreGrupo).agregarMiembro(nombreContacto);
+    }
+
+    private void borrarMensajesDeContacto(String nombreContacto) throws UsuarioNoExiste {
+        if (!this.existeContacto(nombreContacto)) {
+            throw new UsuarioNoExiste();
+        }
+        this.cantidadTotalMensajesRecibidos -= this.contactos.get(nombreContacto).getCantidadRecibidos();
+        cantidadDeMensajesEnviados -= this.contactos.get(nombreContacto).getCantidadEnviados();
+        this.contactos.get(nombreContacto).borrarMensajes();
+    }
+
+    private void borrarMensajesDeGupo(String nombreGrupo) throws GrupoNoExiste {
+        if(!this.existeGrupo(nombreGrupo)) {
+            throw new GrupoNoExiste();
+        }
+        this.cantidadDeMensajesEnviados -= this.grupos.get(nombreGrupo).getCantidadEnviados();
+    }
+
+    @Override
+    public String toString() {
+        return "Chat de " + this.nombreUsuario;
     }
 }
