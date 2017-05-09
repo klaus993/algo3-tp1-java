@@ -1,16 +1,16 @@
-package algochat;
+package exceptions;
 
 /**
  * Created by klaus on 5/5/17.
  */
 
-public class UsuarioNoExiste extends Exception
+public class GrupoYaExiste extends Exception
 {
     //Parameterless Constructor
-    public UsuarioNoExiste() {}
+    public GrupoYaExiste() {}
 
     //Constructor that accepts a message
-    public UsuarioNoExiste(String message)
+    public GrupoYaExiste(String message)
     {
         super(message);
     }

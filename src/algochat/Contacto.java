@@ -3,29 +3,55 @@ package algochat;
 /**
  * Created by klaus on 5/5/17.
  */
-public class Contacto {
+class Contacto {
 
     private String nombre;
-    private Conversacion conversacion;
+    private ConversacionIndividual conversacion;
     private int cantidadEnviados;
     private int cantidadRecibidos;
 
-    public int getCantidadEnviados() {
+    int getCantidadEnviados() {
         return cantidadEnviados;
     }
 
-    public int getCantidadRecibidos() {
+    int getCantidadRecibidos() {
         return cantidadRecibidos;
     }
 
-    public Contacto(String nombreContacto) {
+    Contacto(String nombre) {
+        this.nombre = nombre;
+        this.cantidadEnviados = 0;
+        this.cantidadRecibidos = 0;
+        this.conversacion = null;
     }
 
-    protected void borrarMensajes() {
+    void borrarMensajes() {
         this.conversacion.borrarMensajes();
     }
 
-    public String getNombre() {
+    String getNombre() {
         return nombre;
+    }
+
+    void enviarMensaje(String mensaje) {
+        if (this.conversacion == null) {
+            this.conversacion = new ConversacionIndividual(this.getNombre());
+        }
+        conversacion.enviarMensaje(mensaje);
+    }
+
+    public AlgoConversacion obtenerConversacion() {
+        return this.conversacion.obtenerConversacion();
+    }
+
+    public void recibirMensaje(String mensaje) {
+        if (this.conversacion == null) {
+            this.conversacion = new ConversacionIndividual(this.getNombre());
+        }
+        this.conversacion.recibirMensaje(mensaje);
+    }
+
+    public void incrementarRecibidos() {
+        this.cantidadRecibidos++;
     }
 }

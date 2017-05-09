@@ -1,16 +1,19 @@
 package algochat;
 
+import exceptions.UsuarioNoExiste;
+import exceptions.UsuarioYaExiste;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by klaus on 5/5/17.
  */
-public class Grupo {
+class Grupo {
 
     private String nombre;
     private Map<String, Contacto> miembros;
-    private Conversacion conversacion;
+    private ConversacionGrupal conversacion;
     private int cantidadMiembros;
 
     public Grupo(String nombre) {
@@ -35,7 +38,7 @@ public class Grupo {
         this.conversacion.enviarMensaje(mensaje);
     }
 
-    protected int getCantidadDeMensajes(String nombreMiembro) throws UsuarioNoExiste{
+    protected int getCantidadDeMensajes(String nombreMiembro) throws UsuarioNoExiste {
         if(!this.existeMiembro(nombreMiembro)) {
             throw new UsuarioNoExiste();
         }
@@ -56,5 +59,17 @@ public class Grupo {
 
     public int getCantidadRecibidos() {
         return this.conversacion.getCantidadRecibidos();
+    }
+
+    public AlgoConversacion obtenerConversacion() {
+        return this.conversacion.obtenerConversacion();
+    }
+
+    public void recibirMensaje(String nombreContacto, String mensaje) throws UsuarioNoExiste {
+        if (!this.existeMiembro(nombreContacto)) {
+            throw new UsuarioNoExiste();
+        }
+        this.conversacion.recibirMensaje(nombreContacto, mensaje);
+        this.miembros.get(nombreContacto).incrementarRecibidos();
     }
 }

@@ -6,40 +6,51 @@ import java.util.List;
 /**
  * Created by klaus on 5/5/17.
  */
-public class Conversacion {
+class Conversacion {
 
-    private List<String> conversacion;
-    private int cantidadEnviados;
-    private int cantidadRecibidos;
+    List<String> conversacion;
+    int cantidadEnviados;
+    int cantidadRecibidos;
 
-    public Conversacion() {
+    Conversacion() {
         this.conversacion = new ArrayList<>();
         this.cantidadEnviados = 0;
         this.cantidadRecibidos = 0;
     }
 
-    public int getCantidadEnviados() {
+    int getCantidadEnviados() {
         return cantidadEnviados;
     }
 
-    public int getCantidadRecibidos() {
+    int getCantidadRecibidos() {
         return cantidadRecibidos;
     }
 
-    public void borrarMensajes() {
+    void borrarMensajes() {
         this.cantidadEnviados = 0;
         this.cantidadRecibidos = 0;
         this.conversacion = new ArrayList<>();
         this.reiniciarContadores();
     }
 
-    protected void reiniciarContadores() {}
+    void reiniciarContadores() {}
 
-    public void enviarMensaje(String mensaje) {
-        this.conversacion.addAll(0, mensaje);
+    void enviarMensaje(String mensaje) {
+        this.conversacion.add(0, mensaje);
         this.cantidadEnviados++;
     }
 
-    public int getCantidadDeMensajes(String nombreMiembro) {
+    AlgoConversacion obtenerConversacion() {
+        return new AlgoConversacion(this);
+    }
+
+    String get(int index) throws IndexOutOfBoundsException {
+        if (index >= this.cantidadEnviados + this.cantidadRecibidos) {
+            throw new IndexOutOfBoundsException();
+        }
+        return this.conversacion.get(index);
+    }
+
+    public void recibirMensaje(String nombreContacto, String mensaje) {
     }
 }
