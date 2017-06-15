@@ -35,78 +35,82 @@ public class AlgoChat {
         this.cantidadTotalMensajesRecibidos = 0;
     }
 
-    private boolean existeContacto(String nombreContacto) {
+    public boolean existeContacto(String nombreContacto) {
         return this.contactos.containsKey(nombreContacto);
     }
 
-    private boolean existeGrupo(String nombreGrupo) {
+    public boolean existeGrupo(String nombreGrupo) {
         return this.grupos.containsKey(nombreGrupo);
     }
 
-    public int getCantidadDeChatsIndividuales() {
+    public int cantidadDeChatsIndividuales() {
         return cantidadDeChatsIndividuales;
     }
 
-    public int getCantidadDeContactos() {
+    public int cantidadDeContactos() {
         return cantidadDeContactos;
     }
 
-    public int getCantidadDeChatsGrupales() {
+    public int cantidadDeChatsGrupales() {
         return cantidadDeChatsGrupales;
     }
 
-    public String getNombreUsuario() {
+    public String nombreUsuario() {
         return nombreUsuario;
     }
 
-    public int getCantidadDeGrupos() {
+    public int cantidadDeGrupos() {
         return cantidadDeGrupos;
     }
 
-    public int getCantidadDeMensajesEnviados() {
+    public int cantidadDeMensajesEnviados() {
         return cantidadDeMensajesEnviados;
     }
 
-    public int getCantidadTotalMensajesRecibidos() {
+    public int cantidadTotalMensajesEnviados() {
+        return cantidadDeMensajesEnviados;
+    }
+
+    public int cantidadTotalMensajesRecibidos() {
         return cantidadTotalMensajesRecibidos;
     }
 
-    public int getCantidadMensajesDe(String contacto) throws UsuarioNoExiste {
+    public int cantidadMensajesDe(String contacto) {
         if (!this.existeContacto(contacto)) {
             throw new UsuarioNoExiste();
         }
         return contactos.get(contacto).getCantidadRecibidos();
     }
 
-    public int getCantidadMensajesEnviadosA(String contacto) throws UsuarioNoExiste {
+    public int cantidadMensajesEnviadosA(String contacto) {
         if (!this.existeContacto(contacto)) {
             throw new UsuarioNoExiste();
         }
         return contactos.get(contacto).getCantidadEnviados();
     }
 
-    public int getCantidadMensajesEnviadosAlGrupo(String grupo) throws GrupoNoExiste {
+    public int cantidadMensajesEnviadosAlGrupo(String grupo) {
         if (!existeGrupo(grupo)) {
             throw new GrupoNoExiste();
         }
         return grupos.get(grupo).getCantidadEnviados();
     }
 
-    public int getCantidadMensajesRecibidosDelGrupo(String grupo) throws GrupoNoExiste {
+    public int cantidadMensajesRecibidosDelGrupo(String grupo) {
         if (!existeGrupo(grupo)) {
             throw new GrupoNoExiste();
         }
         return this.grupos.get(grupo).getCantidadRecibidos();
     }
 
-    public int getCantidadMiembrosEnGrupo(String grupo) throws GrupoNoExiste {
+    public int cantidadMiembrosEnGrupo(String grupo) {
         if (!existeGrupo(grupo)) {
             throw new GrupoNoExiste();
         }
         return this.grupos.get(grupo).getCantidadMiembros();
     }
 
-    public void agregarContacto(String nombreContacto) throws UsuarioYaExiste {
+    public void agregarContacto(String nombreContacto) {
         if (this.existeContacto(nombreContacto)) {
             throw new UsuarioYaExiste();
         }
@@ -114,7 +118,7 @@ public class AlgoChat {
         this.cantidadDeContactos++;
     }
 
-    public void agregarContactoAGrupo(String nombreContacto, String nombreGrupo) throws UsuarioNoExiste, GrupoNoExiste, UsuarioYaExiste {
+    public void agregarContactoAGrupo(String nombreContacto, String nombreGrupo) {
         if (!this.existeContacto(nombreContacto)) {
             throw new UsuarioNoExiste();
         }
@@ -124,7 +128,7 @@ public class AlgoChat {
         this.grupos.get(nombreGrupo).agregarMiembro(this.contactos.get(nombreContacto));
     }
 
-    private void borrarMensajesDeContacto(String nombreContacto) throws UsuarioNoExiste {
+    public void borrarMensajesDelContacto(String nombreContacto) {
         if (!this.existeContacto(nombreContacto)) {
             throw new UsuarioNoExiste();
         }
@@ -133,14 +137,14 @@ public class AlgoChat {
         this.contactos.get(nombreContacto).borrarMensajes();
     }
 
-    private void borrarMensajesDeGupo(String nombreGrupo) throws GrupoNoExiste {
+    public void borrarMensajesDelGrupo(String nombreGrupo)  {
         if (!this.existeGrupo(nombreGrupo)) {
             throw new GrupoNoExiste();
         }
         this.cantidadDeMensajesEnviados -= this.grupos.get(nombreGrupo).getCantidadEnviados();
     }
 
-    public void crearGrupo(String nombreGrupo) throws GrupoYaExiste {
+    public void crearGrupo(String nombreGrupo) {
         if (this.existeGrupo(nombreGrupo)) {
             throw new GrupoYaExiste();
         }
@@ -148,14 +152,14 @@ public class AlgoChat {
         this.cantidadDeGrupos++;
     }
 
-    public void enviarMensajeAContacto(String contacto, String mensaje) throws UsuarioNoExiste {
+    public void enviarMensajeA(String contacto, String mensaje) {
         if (!this.existeContacto(contacto)) {
             throw new UsuarioNoExiste();
         }
         this.contactos.get(contacto).enviarMensaje(mensaje);
     }
 
-    public void enviarMensajeAGrupo(String grupo, String mensaje) throws GrupoNoExiste {
+    public void enviarMensajeAGrupo(String grupo, String mensaje) {
         if (!this.existeGrupo(grupo)) {
             throw new GrupoNoExiste();
         }
@@ -163,21 +167,21 @@ public class AlgoChat {
         this.cantidadDeMensajesEnviados++;
     }
 
-    public AlgoConversacion obtenerConversacionConContacto(String nombreContacto) throws UsuarioNoExiste {
+    public AlgoConversacion obtenerConversacionCon(String nombreContacto) {
         if (!this.existeContacto(nombreContacto)) {
             throw new UsuarioNoExiste();
         }
         return this.contactos.get(nombreContacto).obtenerConversacion();
     }
 
-    public AlgoConversacion obtenerConversacionConGrupo(String nombreGrupo) throws GrupoNoExiste {
+    public AlgoConversacion obtenerConversacionConGrupo(String nombreGrupo) {
         if (!this.existeGrupo(nombreGrupo)) {
             throw new GrupoNoExiste();
         }
         return this.grupos.get(nombreGrupo).obtenerConversacion();
     }
 
-    public void recibirMensajeDeContacto(String nombreContacto, String mensaje) throws UsuarioNoExiste {
+    public void recibirMensajeDe(String nombreContacto, String mensaje) {
         if (!this.existeContacto(nombreContacto)) {
             throw new UsuarioNoExiste();
         }
@@ -185,7 +189,7 @@ public class AlgoChat {
         this.cantidadTotalMensajesRecibidos++;
     }
 
-    public void recibirMensajeDeGrupo(String nombreGrupo, String nombreContacto, String mensaje) throws GrupoNoExiste, UsuarioNoExiste {
+    public void recibirMensajeDeGrupo(String nombreGrupo, String nombreContacto, String mensaje) {
         if (!this.existeGrupo(nombreGrupo)) {
             throw new GrupoNoExiste();
         }

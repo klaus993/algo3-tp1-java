@@ -4,7 +4,7 @@ package exceptions;
  * Created by klaus on 5/5/17.
  */
 
-public class GrupoYaExiste extends Exception
+public class GrupoYaExiste extends RuntimeException
 {
     //Parameterless Constructor
     public GrupoYaExiste() {}
