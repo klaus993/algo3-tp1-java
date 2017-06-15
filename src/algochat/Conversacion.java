@@ -36,7 +36,7 @@ class Conversacion {
     void reiniciarContadores() {}
 
     void enviarMensaje(String mensaje) {
-        this.conversacion.add(0, mensaje);
+        this.conversacion.add(0, "Yo: " + mensaje);
         this.cantidadEnviados++;
     }
 

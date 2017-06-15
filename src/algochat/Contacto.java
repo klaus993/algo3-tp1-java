@@ -11,18 +11,18 @@ public class Contacto {
     private int cantidadRecibidos;
 
     public int getCantidadEnviados() {
-        return cantidadEnviados;
+        return cantidadEnviados + conversacion.getCantidadEnviados();
     }
 
     public int getCantidadRecibidos() {
-        return cantidadRecibidos;
+        return this.cantidadRecibidos + this.conversacion.getCantidadRecibidos();
     }
 
     public Contacto(String nombre) {
         this.nombre = nombre;
         this.cantidadEnviados = 0;
         this.cantidadRecibidos = 0;
-        this.conversacion = null;
+        this.conversacion = new ConversacionIndividual(this.getNombre());
     }
 
     void borrarMensajes() {
@@ -34,9 +34,6 @@ public class Contacto {
     }
 
     public void enviarMensaje(String mensaje) {
-        if (this.conversacion == null) {
-            this.conversacion = new ConversacionIndividual(this.getNombre());
-        }
         conversacion.enviarMensaje(mensaje);
     }
 
@@ -45,13 +42,14 @@ public class Contacto {
     }
 
     public void recibirMensaje(String mensaje) {
-        if (this.conversacion == null) {
-            this.conversacion = new ConversacionIndividual(this.getNombre());
-        }
         this.conversacion.recibirMensaje(mensaje);
     }
 
     public void incrementarRecibidos() {
         this.cantidadRecibidos++;
+    }
+
+    public void disminuirRecibidos(int n) {
+        this.cantidadRecibidos -= n;
     }
 }

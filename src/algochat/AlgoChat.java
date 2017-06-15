@@ -133,7 +133,7 @@ public class AlgoChat {
             throw new UsuarioNoExiste();
         }
         this.cantidadTotalMensajesRecibidos -= this.contactos.get(nombreContacto).getCantidadRecibidos();
-        cantidadDeMensajesEnviados -= this.contactos.get(nombreContacto).getCantidadEnviados();
+        this.cantidadDeMensajesEnviados -= this.contactos.get(nombreContacto).getCantidadEnviados();
         this.contactos.get(nombreContacto).borrarMensajes();
     }
 
@@ -142,6 +142,8 @@ public class AlgoChat {
             throw new GrupoNoExiste();
         }
         this.cantidadDeMensajesEnviados -= this.grupos.get(nombreGrupo).getCantidadEnviados();
+        this.cantidadTotalMensajesRecibidos -= this.grupos.get(nombreGrupo).getCantidadRecibidos();
+        this.grupos.get(nombreGrupo).borrarMensajes();
     }
 
     public void crearGrupo(String nombreGrupo) {
@@ -157,6 +159,7 @@ public class AlgoChat {
             throw new UsuarioNoExiste();
         }
         this.contactos.get(contacto).enviarMensaje(mensaje);
+        this.cantidadDeMensajesEnviados++;
     }
 
     public void enviarMensajeAGrupo(String grupo, String mensaje) {

@@ -20,6 +20,6 @@ public class AlgoConversacion {
     }
 
     public String get(int index) {
-        return this.conversacion.get(index);
+        return this.conversacion.get(index - 1);
     }
 }

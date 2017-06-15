@@ -2,6 +2,7 @@ package algochat;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by klaus on 5/5/17.
@@ -37,5 +38,9 @@ class ConversacionGrupal extends Conversacion {
         }
         this.cantidades.put(nombreContacto, this.cantidades.get(nombreContacto) + 1);
         this.cantidadRecibidos++;
+    }
+
+    public boolean contieneMensajesDe(String nombre) {
+        return this.cantidades.containsKey(nombre);
     }
 }

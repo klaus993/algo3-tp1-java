@@ -18,5 +18,10 @@ class ConversacionIndividual extends Conversacion {
 
     void recibirMensaje(String mensaje) {
         this.conversacion.add(0, this.contacto + ": " + mensaje);
+        this.cantidadRecibidos++;
+    }
+
+    @Override
+    void reiniciarContadores() {
     }
 }

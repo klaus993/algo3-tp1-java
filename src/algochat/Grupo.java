@@ -5,6 +5,7 @@ import exceptions.UsuarioYaExiste;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 /**
  * Created by klaus on 5/5/17.
@@ -20,6 +21,7 @@ class Grupo {
         this.nombre = nombre;
         this.miembros = new HashMap<>();
         this.cantidadMiembros = 1;
+        this.conversacion = new ConversacionGrupal();
     }
 
     protected void agregarMiembro(Contacto miembro) throws UsuarioYaExiste {
@@ -71,5 +73,14 @@ class Grupo {
         }
         this.conversacion.recibirMensaje(nombreContacto, mensaje);
         this.miembros.get(nombreContacto).incrementarRecibidos();
+    }
+
+    public void borrarMensajes() {
+        for (Map.Entry<String, Contacto> entry : this.miembros.entrySet()) {
+            if (this.conversacion.contieneMensajesDe(entry.getKey())) {
+                entry.getValue().disminuirRecibidos(this.conversacion.getCantidadDeMensajes(entry.getKey()));
+            }
+        }
+        this.conversacion.borrarMensajes();
     }
 }
