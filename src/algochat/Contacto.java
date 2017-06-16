@@ -7,21 +7,21 @@ public class Contacto {
 
     private String nombre;
     private ConversacionIndividual conversacion;
-    private int cantidadEnviados;
-    private int cantidadRecibidos;
+    private int cantidadEnviadosGrupo;
+    private int cantidadRecibidosGrupo;
 
     public int getCantidadEnviados() {
-        return cantidadEnviados + conversacion.getCantidadEnviados();
+        return cantidadEnviadosGrupo + conversacion.getCantidadEnviados();
     }
 
     public int getCantidadRecibidos() {
-        return this.cantidadRecibidos + this.conversacion.getCantidadRecibidos();
+        return this.cantidadRecibidosGrupo + this.conversacion.getCantidadRecibidos();
     }
 
     public Contacto(String nombre) {
         this.nombre = nombre;
-        this.cantidadEnviados = 0;
-        this.cantidadRecibidos = 0;
+        this.cantidadEnviadosGrupo = 0;
+        this.cantidadRecibidosGrupo = 0;
         this.conversacion = new ConversacionIndividual(this.getNombre());
     }
 
@@ -46,10 +46,10 @@ public class Contacto {
     }
 
     public void incrementarRecibidos() {
-        this.cantidadRecibidos++;
+        this.cantidadRecibidosGrupo++;
     }
 
     public void disminuirRecibidos(int n) {
-        this.cantidadRecibidos -= n;
+        this.cantidadRecibidosGrupo -= n;
     }
 }
