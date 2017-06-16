@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Created by klaus on 5/5/17.
  */
-class ConversacionGrupal extends Conversacion {
+public class ConversacionGrupal extends Conversacion {
 
     private Map<String, Integer> cantidades;
 
@@ -23,7 +23,7 @@ class ConversacionGrupal extends Conversacion {
         }
     }
 
-    int getCantidadDeMensajes(String nombreMiembro) {
+    public int getCantidadDeMensajes(String nombreMiembro) {
         if(this.cantidades.containsKey(nombreMiembro)) {
             return cantidades.get(nombreMiembro);
         }

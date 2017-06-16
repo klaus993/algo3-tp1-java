@@ -10,7 +10,7 @@ import java.util.function.BiConsumer;
 /**
  * Created by klaus on 5/5/17.
  */
-class Grupo {
+public class Grupo {
 
     private String nombre;
     private Map<String, Contacto> miembros;
@@ -24,7 +24,7 @@ class Grupo {
         this.conversacion = new ConversacionGrupal();
     }
 
-    protected void agregarMiembro(Contacto miembro) throws UsuarioYaExiste {
+    public void agregarMiembro(Contacto miembro) throws UsuarioYaExiste {
         if(this.existeMiembro(miembro.getNombre())) {
             throw new UsuarioYaExiste();
         }
@@ -32,15 +32,15 @@ class Grupo {
         this.cantidadMiembros++;
     }
 
-    protected boolean existeMiembro(String nombre) {
+    public boolean existeMiembro(String nombre) {
         return this.miembros.containsKey(nombre);
     }
 
-    protected void enviarMensaje(String mensaje) {
+    public void enviarMensaje(String mensaje) {
         this.conversacion.enviarMensaje(mensaje);
     }
 
-    protected int getCantidadDeMensajes(String nombreMiembro) throws UsuarioNoExiste {
+    public int getCantidadDeMensajes(String nombreMiembro) throws UsuarioNoExiste {
         if(!this.existeMiembro(nombreMiembro)) {
             throw new UsuarioNoExiste();
         }

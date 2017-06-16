@@ -2,10 +2,7 @@ package tests;
 
 import algochat.AlgoConversacion;
 import algochat.Contacto;
-import junit.framework.JUnit4TestAdapter;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.Before;
 import static org.junit.Assert.*;
 
 /**
